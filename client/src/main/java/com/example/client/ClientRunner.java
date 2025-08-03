@@ -1,20 +1,24 @@
 package com.example.client;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.ssl.SslBundles;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-@Configuration
+/**
+ * A component that runs on startup to call the mTLS-secured server.
+ * It uses a RestTemplate that has been pre-configured with the necessary
+ * SSL settings.
+ */
 @Component
 public class ClientRunner implements CommandLineRunner {
 
     private final RestTemplate restTemplate;
 
+    /**
+     * The RestTemplate bean is automatically injected by Spring.
+     * @param restTemplate The SSL-configured RestTemplate instance.
+     */
     public ClientRunner(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -32,12 +36,5 @@ public class ClientRunner implements CommandLineRunner {
         } catch (Exception e) {
             System.err.println("Failed to connect to mTLS server. Cause: " + e.getMessage());
         }
-    }
-
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder, SslBundles sslBundles) {
-        return restTemplateBuilder
-                .setSslBundle(sslBundles.getBundle("client-bundle")) // Explicitly use the client's SSL bundle
-                .build();
     }
 }
