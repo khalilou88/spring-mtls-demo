@@ -93,3 +93,10 @@ cp certs/server-truststore.jks server/src/main/resources/
 # Copy the client certs to the client module
 cp certs/client.p12 client/src/main/resources/
 cp certs/client-truststore.jks client/src/main/resources/
+
+
+## 4 
+
+./mvnw spring-boot:run -pl server
+
+./mvnw spring-boot:run -pl client
