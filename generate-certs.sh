@@ -47,8 +47,3 @@ mv client-truststore.jks client/src/main/resources/
 
 # Clean up temporary files
 rm *.pem *.csr *.srl
-
-echo "Certificates generated successfully!"
-echo "Server keystore: src/main/resources/server.p12"
-echo "Server truststore: src/main/resources/server-truststore.jks"
-echo "Client keystore: src/main/resources/client.p12"
